@@ -21,13 +21,11 @@ end
 #  "When I check the following ratings: G"
 
 #All movies means our count is equal to the number inserted into the db.
-Then /I should see all the movies/ do
-  page.should have_css("table#movies tbody tr", :count => movies_count.to_i)
-end
-
-#No movies means our count is zero.
-Then /I should not see any movies/ do
-  page.should have_no_css("table#movies tbody tr")
+Then /I should see (all|no) movies/ do |flag|
+  movies = page.find('#movies')
+  rows = movies.all('tr').length
+  expected = (flag == 'no') ? 0 : 11
+  assert expected == rows
 end
 
 #By director
