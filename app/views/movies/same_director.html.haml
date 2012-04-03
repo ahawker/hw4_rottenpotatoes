@@ -1,4 +1,4 @@
-%h1 Movies with the same director (#{@movie.director}) as #{@movie.title}.
+%h1 Movies With The Same Director (#{@movie.director}) as #{@movie.title}.
 
 %table#movies
   %thead
@@ -15,6 +15,6 @@
         %td= movie.director
         %td= movie.rating
         %td= movie.release_date
-        %td= link_to "More aobut #{movie.title}", movie_path(movie)
+        %td= link_to "More about #{movie.title}", movie_path(movie)
 
 = link_to 'Add new movie', new_movie_path

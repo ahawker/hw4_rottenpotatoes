@@ -31,15 +31,16 @@ Then /I should not see any movies/ do
 end
 
 #By director
-Then /^the director of "([^\"]*)" should be "([^\"]*)"$/ do |title, director|
+Then /^the director of "([^"]*)" should be "([^"]*)"$/ do |title, director|
   m = Movie.find_by_title(title)
   m.director.should == director
 end 
 
 When /I (un)?check the following ratings: (.*)/ do |is_unchecked, rating_list|
+  rating_list.delete!("\"")
   rating_list.split(',').each { |r|
-    ratings_str = 'ratings[' + r.strip + ']'
-    if is_unchecked.nil?
+    ratings_str = "ratings[" + r.strip + "]"
+    if !is_unchecked.nil?
       uncheck(ratings_str)
     else
       check(ratings_str)
